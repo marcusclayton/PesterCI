@@ -1,5 +1,5 @@
-function function {
+function dostuff {
 
-  write-output "Output"
+  write-output "stuff"
 
 }

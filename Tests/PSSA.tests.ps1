@@ -1,17 +1,24 @@
+$here = (Split-Path -Parent $MyInvocation.MyCommand.Path ) -replace 'tests', 'code'
+$file = "script.ps1"
+$script = "$here\$file"
+write "$here\$file"
+
+#. "$here\$sut"
+
 Describe 'Testing against PSSA rules' {
-       Context 'PSSA Standard Rules' {
-        $analysis = Invoke-ScriptAnalyzer -Path '..\Code\script.ps1'
-        $scriptAnalyzerRules = Get-ScriptAnalyzerRule
- 
-        forEach ($rule in $scriptAnalyzerRules) {
-            It "Should pass $rule" {
-                If ($analysis.RuleName -contains $rule) {
-                    $analysis |
-                         Where RuleName -EQ $rule -outvariable failures |
-                         Out-Default
-                    $failures.Count | Should Be 0
-                }
-            }
-        }
-    }
+Â Â Â Â Â Â  Context 'PSSA Standard Rules' {
+Â Â Â Â Â Â Â  $analysis = Invoke-ScriptAnalyzer -Path $script
+Â Â Â Â Â Â  Â $scriptAnalyzerRules = Get-ScriptAnalyzerRule
+Â 
+Â Â Â Â Â Â Â  forEach ($rule in $scriptAnalyzerRules) {
+Â Â Â Â Â Â Â Â Â Â Â  It "Should pass $rule" {
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  If ($analysis.RuleName -contains $rule) {
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  $analysis |
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Â Â Â  Where RuleName -EQ $rule -outvariable failures |
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Â Â Â  Out-Default
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  $failures.Count | Should Be 0
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  }
+Â Â Â Â Â Â Â Â Â Â Â  }
+Â Â Â Â Â Â Â  }
+Â Â Â  }
 }

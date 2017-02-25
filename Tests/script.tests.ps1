@@ -10,5 +10,10 @@ Describe "Running App Specific Pester Tests" {
       It "does something useful" {
           $true | Should Be $true
       }
+      
+      It "performs things" {
+          DoStuff | Should Be "stuff"
+      }
+      
     }
 }

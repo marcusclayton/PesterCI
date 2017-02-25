@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'stop'
 Install-PackageProvider -Name Nuget -Scope CurrentUser -Force -Confirm:$false
-Install-Module -Name Pester -Scope CurrentUser -Force -Confirm:$false
-Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force -Confirm:$false
+Install-Module -Name Pester -Scope CurrentUser -Force -Confirm:$false -SkipPublisherCheck
+Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force -Confirm:$false -SkipPublisherCheck
 Import-Module Pester
 Import-Module PSScriptAnalyzer
 Invoke-Pester -OutputFile '.\Results\PesterResults.xml' -OutputFormat 'NUnitXml' -Script '.\Tests\Set-E.tests.ps1'
